@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Big zine — Antoine Brachet</title>
+<link rel="stylesheet" href="zine.css">
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+<style>
+/* SADDLE-STITCHED ZINE — A5 portrait pages, one per sheet-half.
+   Reader order. Use the print dialog "Booklet" option (or print 2-up,
+   double-sided) then fold + staple in the middle = saddle stitch. */
+.book{max-width:148mm;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+.page{width:148mm;height:210mm;margin:0 auto;page-break-after:always}
+.page .num{position:absolute;bottom:8px;right:12px;font-size:10px;color:#666}
+.cover{justify-content:space-between;border:2px solid var(--green)}
+.qr{width:150px;height:150px;background:#fff;padding:8px;margin:14px auto}
+.grid31{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:8px}
+.grid31 .cell{aspect-ratio:1/1;background:#000;border:1px solid #222;position:relative}
+.grid31 .cell b{position:absolute;left:2px;bottom:1px;font-size:8px;color:var(--green)}
+.slot{border:2px dashed var(--cyan);display:flex;align-items:center;justify-content:center;
+  color:#777;font-size:11px;text-align:center;height:100%}
+.rasters{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;height:78%}
+.tag2{display:inline-block;border:1px solid #333;padding:3px 7px;font-size:10px;color:var(--cyan);margin:2px}
+@media print{.page{border:1px solid #ccc}.cover{border:2px solid #333}}
+</style>
+</head>
+<body>
+
+<div class="help">
+  <h1>📕 Big zine (saddle-stitched) — how to make it</h1>
+  <p>1. <b>Print</b> → A5, double-sided, and in the dialog pick <b>"Booklet"</b> layout if available (it reorders pages for you). Turn ON background graphics.<br>
+     2. Fold the whole stack in half. <b>Staple twice on the fold</b> = saddle stitch. (Tuto in the README.)<br>
+     3. The <span class="tag2">VECTOR</span> slot = your 1 vector drawing from the first classes. The <span class="tag2">RASTER ×10</span> slots = 10 images from your second project. Print/glue or drop image files in.</p>
+  <button class="printbtn" onclick="window.print()">▶ PRINT</button>
+</div>
+
+<div class="book">
+
+  <!-- 1. COVER -->
+  <div class="page cover center">
+    <div class="small" style="color:var(--magenta)">IIM · B3 · 2026</div>
+    <div>
+      <div class="neon-title" style="font-size:44px">GENUARY<br>//26</div>
+      <p style="color:var(--cyan);margin-top:14px">the zine</p>
+    </div>
+    <div>
+      <p style="color:var(--yellow);font-weight:bold;font-size:18px">ANTOINE BRACHET</p>
+      <p class="small">generative art · p5.js · vaporwave</p>
+    </div>
+    <span class="num">cover</span>
+  </div>
+
+  <!-- 2. ABOUT ME -->
+  <div class="page">
+    <h2>ABOUT ME</h2>
+    <p>I'm <b>Antoine Brachet</b> — <i>antoine721</i> online — a B3 student at IIM.</p>
+    <p>I like turning simple rules into things that move, glitch and surprise. Generative art is my favourite playground because the computer always shows me something I didn't plan.</p>
+    <p>This zine is the paper version of my Genuary26: 31 days, 31 little programs.</p>
+    <p class="small" style="margin-top:auto">📧 antoine.bbrachet@gmail.com &nbsp; 🐙 github.com/antoine721</p>
+    <span class="num">p.2</span>
+  </div>
+
+  <!-- 3. ABOUT THE PROJECT -->
+  <div class="page">
+    <h2>ABOUT THE PROJECT</h2>
+    <p><b>Genuary</b> is a worldwide challenge: every day of January you code one piece of generative art from a given prompt.</p>
+    <p>I built a website that runs all <b>31 sketches live</b> in the browser with <b>p5.js</b>, plus a <b>non-AI chatbot</b> (pure keyword rules, no GPT) that explains the code.</p>
+    <p>This saddle-stitched zine collects the highlights on paper: the art, a QR to the live site, and how it was made.</p>
+    <span class="num">p.3</span>
+  </div>
+
+  <!-- 4. QR -->
+  <div class="page center">
+    <h2>SEE IT LIVE</h2>
+    <img class="qr" alt="QR to site"
+      src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&bgcolor=ffffff&data=https://antoine721.github.io/genuary">
+    <p>Scan to open the interactive gallery.</p>
+    <p style="color:var(--cyan)"><b>antoine721.github.io/genuary</b></p>
+    <span class="num">p.4</span>
+  </div>
+
+  <!-- 5. THE 31 -->
+  <div class="page">
+    <h2>THE 31 GENUARIES</h2>
+    <div id="grid31" class="grid31"></div>
+    <p class="small" style="margin-top:6px">All hand-coded in p5.js. Each tile is a different prompt.</p>
+    <span class="num">p.5</span>
+  </div>
+
+  <!-- 6. VECTOR IMAGE -->
+  <div class="page">
+    <h2>VECTOR PIECE</h2>
+    <p class="small">1 vector-drawn image from the first classes ↓</p>
+    <div class="slot" style="height:80%">drop your VECTOR image here<br>(replace this box with your .svg/.png)</div>
+    <span class="num">p.6</span>
+  </div>
+
+  <!-- 7. RASTER 1-4 -->
+  <div class="page">
+    <h2>RASTER ① — ④</h2>
+    <div class="rasters">
+      <div class="slot">raster 1</div><div class="slot">raster 2</div>
+      <div class="slot">raster 3</div><div class="slot">raster 4</div>
+    </div>
+    <span class="num">p.7</span>
+  </div>
+
+  <!-- 8. RASTER 5-8 -->
+  <div class="page">
+    <h2>RASTER ⑤ — ⑧</h2>
+    <div class="rasters">
+      <div class="slot">raster 5</div><div class="slot">raster 6</div>
+      <div class="slot">raster 7</div><div class="slot">raster 8</div>
+    </div>
+    <span class="num">p.8</span>
+  </div>
+
+  <!-- 9. RASTER 9-10 -->
+  <div class="page">
+    <h2>RASTER ⑨ — ⑩</h2>
+    <div class="rasters" style="grid-template-rows:1fr">
+      <div class="slot">raster 9</div><div class="slot">raster 10</div>
+    </div>
+    <p class="small">10 raster images from my second project.</p>
+    <span class="num">p.9</span>
+  </div>
+
+  <!-- 10. BACK / CONTACT -->
+  <div class="page cover center">
+    <div class="neon-title" style="font-size:26px">THANKS<br>FOR<br>READING</div>
+    <div>
+      <p style="color:var(--yellow);font-weight:bold">ANTOINE BRACHET</p>
+      <p>📧 antoine.bbrachet@gmail.com</p>
+      <p>🐙 github.com/antoine721</p>
+      <p class="small">made with p5.js · Genuary//26 · IIM B3</p>
+    </div>
+    <span class="num">back</span>
+  </div>
+
+</div>
+
+<script src="../js/sketches.js"></script>
+<script>
+  // live mini-previews of all 31 in the grid page
+  const g = document.getElementById("grid31");
+  SKETCHES.forEach(def=>{
+    const cell=document.createElement("div");cell.className="cell";
+    const b=document.createElement("b");b.textContent="#"+def.n;cell.appendChild(b);
+    g.appendChild(cell);
+    new p5(p=>def.build(p,{w:80,h:80,animate:false}),cell);
+  });
+</script>
+</body>
+</html>

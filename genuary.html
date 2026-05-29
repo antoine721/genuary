@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genuary viewer — Antoine Brachet</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+</head>
+<body>
+
+<div class="viewer-wrap">
+  <div class="viewer-top">
+    <a class="btn" href="index.html">◄ gallery</a>
+    <span class="vnum" id="vnum">#01</span>
+    <span class="vtitle" id="vtitle">…</span>
+    <span class="vprompt" id="vprompt">…</span>
+    <button class="btn" id="prev">◄ prev</button>
+    <button class="btn" id="restart">⟳ re-run</button>
+    <button class="btn" id="save">⤓ png</button>
+    <button class="btn" id="next">next ►</button>
+  </div>
+  <div id="stage"></div>
+</div>
+
+<!-- NON-AI CHATBOT -->
+<div id="chatbot">
+  <div class="chat-head"><span>🤖 NON-AI BOT</span><span>▾</span></div>
+  <div class="chat-body"></div>
+  <div class="chat-quick">
+    <button>favourite</button>
+    <button>this sketch</button>
+    <button>what is genuary</button>
+    <button>are you an AI?</button>
+    <button>contact</button>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="ask about the code…">
+    <button>▶</button>
+  </div>
+</div>
+
+<script src="js/sketches.js"></script>
+<script src="js/viewer.js"></script>
+<script src="js/chatbot.js"></script>
+</body>
+</html>

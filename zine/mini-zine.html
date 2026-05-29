@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mini-zine — Antoine Brachet</title>
+<link rel="stylesheet" href="zine.css">
+<style>
+/* MINI ZINE = une image pleine page, A4 paysage, prête à imprimer + plier.
+   L'image (mini-zine.png) contient déjà les 8 pages + la ligne "COUPER ICI". */
+.sheet{
+  width:297mm;height:210mm;margin:0 auto;background:#16002e;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+}
+.sheet img{width:297mm;height:210mm;display:block;object-fit:cover}
+/* message si l'image n'est pas encore enregistrée */
+.missing{
+  display:none;color:#fff;text-align:center;padding:40px;font-size:15px;line-height:1.6}
+.missing b{color:var(--yellow)}
+.sheet.noimg img{display:none}
+.sheet.noimg .missing{display:block}
+.wrap{position:relative;max-width:297mm;margin:0 auto}
+@media print{ .wrap{max-width:none} }
+</style>
+</head>
+<body>
+
+<div class="help">
+  <h1>🖨️ Mini-zine — comment imprimer & plier</h1>
+  <p>1. Clique <b>PRINT</b> → choisis <b>Paysage (Landscape)</b>, <b>A4</b>, marges <b>Aucune</b>, échelle <b>100%</b>, et active <b>"Graphismes d'arrière-plan"</b>.<br>
+     2. Plie la feuille <b>en deux dans la longueur</b>, puis encore en deux deux fois → 8 cases.<br>
+     3. Déplie une fois et <b>coupe la ligne "COUPER ICI"</b> au milieu.<br>
+     4. Pousse les bords pour former un <b>+</b>, puis enroule → petit livret de 8 pages. 🎉</p>
+  <p class="small">L'image fait déjà la bonne mise en page (la rangée du haut est à l'envers, c'est normal).</p>
+  <button class="printbtn" onclick="window.print()">▶ PRINT</button>
+</div>
+
+<div class="wrap">
+  <div class="sheet" id="sheet">
+    <img id="zimg" src="mini-zine.png" alt="Mini-zine — GENUARY//26 par Antoine Brachet"
+         onerror="document.getElementById('sheet').classList.add('noimg')">
+    <div class="missing">
+      🖼️ <b>Image manquante.</b><br><br>
+      Enregistre ton image de mini-zine ici :<br>
+      <b>zine/mini-zine.png</b><br><br>
+      (clic droit sur l'image → "Enregistrer sous" → dans le dossier <b>zine</b>, nom <b>mini-zine.png</b>)
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
